@@ -318,7 +318,7 @@ nav a{transition:color .2s ease}
       var d=i+1;var p=prices[i];var per=(p/cur).toFixed(2);var save=cur>1?Math.round((1-(p/cur)/4)*100):0;
       var popular=d===2?' style="border-color:var(--accent);box-shadow:0 0 30px rgba(0,168,255,.25);"':'';
       html+='<div class="card-hover"'+popular+' style="background:var(--card);border:1px solid var(--border);border-radius:18px;padding:24px 20px;text-align:center;position:relative;">';
-      if(d===2){html+='<span style="position:absolute;top:-11px;left:50%;transform:translateX(-50%);background:linear-gradient(100deg,var(--accent),var(--accent2));color:#04121f;font-size:10px;font-weight:800;padding:4px 12px;border-radius:20px;letter-spacing:.06em;">MÁS ELEGIDO</span>';}
+      /* etiqueta MAS ELEGIDO removida */
       html+='<div style="font-size:34px;font-weight:900;margin:6px 0 2px;" class="num">$'+p+'</div><div style="color:var(--muted);font-size:13px;margin-bottom:14px;">por '+LABEL[cur]+'</div>';
       html+='<div style="border-top:1px solid var(--border);padding-top:14px;margin-bottom:14px;"><div style="font-size:15px;font-weight:800;margin-bottom:4px;">'+d+' dispositivo'+(d>1?'s':'')+'</div><div style="color:var(--accent2);font-size:12px;font-weight:700;" class="num">≈ $'+per+' / mes</div>';
       if(save>0){html+='<div style="color:#4ade80;font-size:11px;font-weight:700;margin-top:4px;">Ahorra '+save+'%</div>';}
