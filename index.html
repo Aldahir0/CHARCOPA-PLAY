@@ -121,7 +121,12 @@ nav a{transition:color .2s ease}
     <p style="display:inline-flex;align-items:center;gap:8px;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:#ff6b6b;font-weight:800;margin:0 0 12px;border:1px solid rgba(255,61,61,.4);background:rgba(255,61,61,.1);padding:7px 16px;border-radius:30px;"><span style="width:9px;height:9px;border-radius:50%;background:#ff3d3d;display:inline-block;box-shadow:0 0 10px #ff3d3d;"></span> En vivo</p>
     <h2 style="font-size:clamp(24px,3.5vw,34px);font-weight:900;margin:0 0 12px;line-height:1.2;">Transmisi&oacute;n <span style="background:linear-gradient(100deg,#ff3d3d,#ff9500);-webkit-background-clip:text;background-clip:text;color:transparent;">en vivo</span></h2>
     <p style="color:var(--muted);font-size:15px;margin:0 0 26px;">Canales nacionales e internacionales, deportes y eventos en vivo. Calidad HD, FHD y 4K. Pide tu acceso y mira en segundos.</p>
-    <a href="https://telepluspromax.xyz/Revendedores/line?trial=1" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:10px;background:linear-gradient(100deg,#ff3d3d,#ff9500);color:#fff;font-weight:800;padding:16px 34px;border-radius:14px;text-decoration:none;font-size:16px;box-shadow:0 8px 30px rgba(255,61,61,.45);transition:transform .2s ease;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'"><i class="ri-play-circle-fill"></i> Ver transmisi&oacute;n en vivo</a>
+    <div style="max-width:860px;margin:0 auto;">
+      <video id="livePlayer" controls playsinline autoplay muted style="width:100%;aspect-ratio:16/9;border-radius:16px;border:1px solid rgba(255,61,61,.4);background:#000;display:block;box-shadow:0 20px 60px rgba(255,61,61,.25);"></video>
+      <p style="color:var(--muted);font-size:13px;margin:10px 0 0;">Se&ntilde;al en vivo HD. Si no carga, <a href="https://vortexlive.icu:443/playlist/Israel3434/casa2062/m3u?output=hls&key=live" target="_blank" rel="noopener" style="color:var(--accent2);font-weight:700;">abre la se&ntilde;al directa aqu&iacute;</a> &middot; <a href="https://telepluspromax.xyz/Revendedores/line?trial=1" target="_blank" rel="noopener" style="color:var(--accent2);font-weight:700;">pedir acceso completo</a></p>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@1"></script>
+    <script>(function(){var v=document.getElementById('livePlayer');var src='https://vortexlive.icu:443/playlist/Israel3434/casa2062/m3u?output=hls&key=live';if(v){if(v.canPlayType('application/vnd.apple.mpegurl')){v.src=src;}else if(window.Hls&&Hls.isSupported()){var h=new Hls();h.loadSource(src);h.attachMedia(v);}v.play().catch(function(){});}})();</script>
   </div>
 </section>
 <!-- CARRUSEL: ASÍ SE VE LA APP -->
