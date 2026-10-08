@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://aldahir0.github.io/CHARCOPA-PLAY/sitemap.xml
