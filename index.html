@@ -406,36 +406,57 @@ nav a{transition:color .2s ease}
   });
 })();
 </script>
-<!-- Widget chat soporte estilo chatbot -->
+<!-- Widget chatbot automatico (sin salir de la pagina) -->
 <div id="waWidget" style="position:fixed;bottom:18px;right:60px;z-index:9999;font-family:inherit;">
-  <div id="waPanel" style="display:none;position:absolute;bottom:74px;right:0;width:320px;max-width:calc(100vw - 40px);background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 12px 40px rgba(0,0,0,.35);">
+  <div id="waPanel" style="display:none;position:absolute;bottom:74px;right:0;width:330px;max-width:calc(100vw - 40px);background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 12px 40px rgba(0,0,0,.35);">
     <div style="background:#1a73e8;color:#fff;padding:14px 16px;display:flex;align-items:center;gap:12px;">
       <div style="width:38px;height:38px;border-radius:50%;background:rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;"><i class="ri-customer-service-2-line"></i></div>
       <div style="flex:1;min-width:0;">
         <div style="font-weight:700;font-size:14px;line-height:1.2;">Soporte CHARCOPA PLAY</div>
-        <div style="font-size:11px;opacity:.9;display:flex;align-items:center;gap:5px;"><span style="width:8px;height:8px;border-radius:50%;background:#34d399;display:inline-block;"></span>En l&iacute;nea &middot; Responde al instante</div>
+        <div style="font-size:11px;opacity:.9;display:flex;align-items:center;gap:5px;"><span style="width:8px;height:8px;border-radius:50%;background:#34d399;display:inline-block;"></span>Bot autom&aacute;tico · Responde al instante</div>
       </div>
       <button id="waClose" style="background:none;border:none;color:#fff;font-size:22px;cursor:pointer;line-height:1;padding:0;">&times;</button>
     </div>
-    <div style="background:#f5f7fb;padding:14px;max-height:380px;overflow-y:auto;">
-      <div style="background:#fff;border-radius:12px 12px 12px 4px;padding:10px 12px;font-size:13px;color:#333;max-width:92%;box-shadow:0 1px 2px rgba(0,0,0,.06);line-height:1.4;margin-bottom:12px;">&iexcl;Hola! Bienvenido a CHARCOPA PLAY. Por favor, selecciona la opci&oacute;n que necesitas consultar:</div>
-      <div style="display:flex;flex-direction:column;gap:8px;">
-        <button class="waOpt" data-msg="Hola CHARCOPA PLAY, ¿cómo instalo la app TELEPLUS PRO MAX?" style="background:#fff;border:1px solid #c5d9f5;border-radius:10px;padding:10px 12px;font-size:13px;color:#1a73e8;cursor:pointer;text-align:left;display:flex;align-items:center;gap:8px;font-family:inherit;font-weight:600;width:100%;"><i class="ri-download-line"></i> &iquest;C&oacute;mo instalar la app?</button>
-        <button class="waOpt" data-msg="Hola CHARCOPA PLAY, quiero información sobre planes y precios." style="background:#fff;border:1px solid #c5d9f5;border-radius:10px;padding:10px 12px;font-size:13px;color:#1a73e8;cursor:pointer;text-align:left;display:flex;align-items:center;gap:8px;font-family:inherit;font-weight:600;width:100%;"><i class="ri-price-tag-3-line"></i> Planes y precios</button>
-        <button class="waOpt" data-msg="Hola CHARCOPA PLAY, quiero mi prueba gratis." style="background:#fff;border:1px solid #c5d9f5;border-radius:10px;padding:10px 12px;font-size:13px;color:#1a73e8;cursor:pointer;text-align:left;display:flex;align-items:center;gap:8px;font-family:inherit;font-weight:600;width:100%;"><i class="ri-gift-line"></i> Pedir prueba gratis</button>
-        <button class="waOpt" data-msg="Hola CHARCOPA PLAY, tengo un problema con el servicio." style="background:#fff;border:1px solid #c5d9f5;border-radius:10px;padding:10px 12px;font-size:13px;color:#1a73e8;cursor:pointer;text-align:left;display:flex;align-items:center;gap:8px;font-family:inherit;font-weight:600;width:100%;"><i class="ri-error-warning-line"></i> Problemas con el servicio</button>
-        <button class="waOpt" data-msg="Hola CHARCOPA PLAY, quiero renovar o pagar mi servicio." style="background:#fff;border:1px solid #c5d9f5;border-radius:10px;padding:10px 12px;font-size:13px;color:#1a73e8;cursor:pointer;text-align:left;display:flex;align-items:center;gap:8px;font-family:inherit;font-weight:600;width:100%;"><i class="ri-bank-card-line"></i> Renovar / pagar servicio</button>
-        <button id="waEnd" style="background:#fff;border:1px solid #f5c2c2;border-radius:10px;padding:10px 12px;font-size:13px;color:#d93025;cursor:pointer;text-align:left;display:flex;align-items:center;gap:8px;font-family:inherit;font-weight:600;width:100%;"><i class="ri-close-circle-line"></i> Finalizar conversaci&oacute;n</button>
-      </div>
-    </div>
+    <div id="waMsgs" style="background:#f5f7fb;padding:14px;max-height:320px;overflow-y:auto;display:flex;flex-direction:column;gap:10px;"></div>
+    <div id="waOpts" style="background:#f5f7fb;padding:0 14px 10px;display:flex;flex-direction:column;gap:6px;max-height:180px;overflow-y:auto;"></div>
     <div style="padding:10px;background:#fff;display:flex;gap:8px;border-top:1px solid #eee;align-items:center;">
-      <input id="waInput" type="text" placeholder="Escribe tu mensaje..." style="flex:1;border:1px solid #ddd;border-radius:20px;padding:10px 14px;font-size:13px;font-family:inherit;outline:none;color:#111;" />
+      <input id="waInput" type="text" placeholder="Escribe tu pregunta..." style="flex:1;border:1px solid #ddd;border-radius:20px;padding:10px 14px;font-size:13px;font-family:inherit;outline:none;color:#111;" />
       <button id="waSend" style="background:#1a73e8;color:#fff;border:none;border-radius:50%;width:40px;height:40px;cursor:pointer;font-size:15px;flex-shrink:0;display:flex;align-items:center;justify-content:center;"><i class="ri-send-plane-fill"></i></button>
     </div>
   </div>
   <button id="waBtn" style="background:#1a73e8;color:#fff;width:58px;height:58px;border:none;border-radius:50%;cursor:pointer;font-size:26px;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 24px rgba(26,115,232,.5);animation:waPulse 2s infinite;"><i class="ri-customer-service-2-line"></i></button>
 </div>
 <style>@keyframes waPulse{0%{box-shadow:0 8px 24px rgba(26,115,232,.5),0 0 0 0 rgba(26,115,232,.45);}70%{box-shadow:0 8px 24px rgba(26,115,232,.5),0 0 0 14px rgba(26,115,232,0);}100%{box-shadow:0 8px 24px rgba(26,115,232,.5),0 0 0 0 rgba(26,115,232,0);}}</style>
-<script>(function(){var btn=document.getElementById("waBtn"),panel=document.getElementById("waPanel"),close=document.getElementById("waClose"),input=document.getElementById("waInput"),send=document.getElementById("waSend"),end=document.getElementById("waEnd"),opts=document.querySelectorAll(".waOpt");function toggle(){panel.style.display=panel.style.display==="block"?"none":"block";}btn.addEventListener("click",toggle);close.addEventListener("click",toggle);if(end){end.addEventListener("click",toggle);}function waOpen(t){window.open("https://wa.me/593996563465?text="+encodeURIComponent(t),"_blank");}for(var i=0;i<opts.length;i++){opts[i].addEventListener("click",function(){waOpen(this.getAttribute("data-msg"));});}function enviar(){var t=(input.value||"").trim();if(!t){input.focus();return;}waOpen(t);}send.addEventListener("click",enviar);input.addEventListener("keydown",function(e){if(e.key==="Enter"){enviar();}});})();</script>
+<script>(function(){
+var btn=document.getElementById("waBtn"),panel=document.getElementById("waPanel"),close=document.getElementById("waClose"),input=document.getElementById("waInput"),send=document.getElementById("waSend"),msgs=document.getElementById("waMsgs"),opts=document.getElementById("waOpts");
+var WA='<div style="margin-top:8px;"><a href="https://wa.me/593996563465?text=Hola%20CHARCOPA%20PLAY%2C%20necesito%20atencion%20personalizada" target="_blank" rel="noopener" style="display:inline-block;background:#25D366;color:#fff;text-decoration:none;font-size:12px;font-weight:700;padding:7px 12px;border-radius:20px;"><i class="ri-whatsapp-line"></i> Atenci&oacute;n humana por WhatsApp</a></div>';
+var RES={
+instalar:'Para instalar la app: 1) Abre Downloader en tu TV Box / Fire Stick. 2) Ingresa el código <b>6030815</b> (TELEPLUS IBO GLASS) o <b>5020619</b> (4K Auto Demo). 3) Instala, abre y listo.',
+precios:'Precios oficiales: 1 mes desde $4, 3 meses $10, 6 meses $18, 12 meses $33 (1 dispositivo). Promoción limitada: <b>$25 por 12 meses</b>. Mayor duración = mayor ahorro.',
+prueba:'Sí, tenemos prueba gratis de 1 hora. Te generamos usuario y contraseña al instante para que pruebes todos los canales, películas y deportes.',
+problemas:'Si tienes fallas: 1) Revisa que tu internet sea de al menos 5 MB. 2) Cierra y vuelve a abrir la app. 3) Reinicia tu dispositivo. Si el problema sigue, te ayudamos de inmediato.',
+pago:'Para pagar o renovar: haz la transferencia bancaria y envíanos el comprobante. Tu servicio se activa al instante. Te enviamos los datos de pago de forma segura.',
+deportes:'Tenemos todos los deportes en vivo: Liga Pro de Ecuador, ligas de Europa, UFC, PPV, box y más. Los encuentras en la sección Deportes de la app.',
+default:'Gracias por tu consulta. Para atenderte mejor y darte información exacta, contáctanos por WhatsApp y te respondemos al instante.'
+};
+var OPTS=[
+{t:'¿Cómo instalar la app?',k:'instalar',i:'ri-download-line'},
+{t:'Planes y precios',k:'precios',i:'ri-price-tag-3-line'},
+{t:'Pedir prueba gratis',k:'prueba',i:'ri-gift-line'},
+{t:'Problemas con el servicio',k:'problemas',i:'ri-error-warning-line'},
+{t:'Renovar / pagar servicio',k:'pago',i:'ri-bank-card-line'},
+{t:'Deportes y Liga Pro',k:'deportes',i:'ri-football-line'},
+{t:'Finalizar conversación',k:'end',i:'ri-close-circle-line',red:true}
+];
+function toggle(){panel.style.display=panel.style.display==='block'?'none':'block';}
+btn.addEventListener('click',toggle);close.addEventListener('click',toggle);
+function bot(html){var d=document.createElement('div');d.style.cssText='background:#fff;border-radius:12px 12px 12px 4px;padding:10px 12px;font-size:13px;color:#333;max-width:88%;box-shadow:0 1px 2px rgba(0,0,0,.06);line-height:1.5;align-self:flex-start;';d.innerHTML=html;msgs.appendChild(d);msgs.scrollTop=msgs.scrollHeight;}
+function user(t){var d=document.createElement('div');d.style.cssText='background:#1a73e8;color:#fff;border-radius:12px 12px 4px 12px;padding:8px 12px;font-size:13px;max-width:88%;line-height:1.4;align-self:flex-end;';d.textContent=t;msgs.appendChild(d);msgs.scrollTop=msgs.scrollHeight;}
+function renderOpts(){opts.innerHTML='';OPTS.forEach(function(o){var b=document.createElement('button');b.textContent=o.t;b.style.cssText='background:#fff;border:1px solid '+(o.red?'#f5c2c2':'#c5d9f5')+';border-radius:10px;padding:8px 12px;font-size:12.5px;color:'+(o.red?'#d93025':'#1a73e8')+';cursor:pointer;text-align:left;display:flex;align-items:center;gap:8px;font-family:inherit;font-weight:600;width:100%;';b.innerHTML='<i class="'+o.i+'"></i> '+o.t;b.addEventListener('click',function(){if(o.k==='end'){toggle();return;}user(o.t);setTimeout(function(){bot(RES[o.k]+WA);},500);});opts.appendChild(b);});}
+function responder(t){var l=t.toLowerCase();if(/instal|download|código|codigo|app|descarg/.test(l))return RES.instalar;if(/precio|plan|cuanto|valor|costo|mes|barato/.test(l))return RES.precios;if(/prueba|demo|gratis|trial|probar/.test(l))return RES.prueba;if(/falla|no funciona|corta|traba|problema|error|no carga|se traba/.test(l))return RES.problemas;if(/pago|pagar|renovar|transferencia|banco|cuenta|activar/.test(l))return RES.pago;if(/deporte|liga|futbol|fútbol|ufc|box|ppv|ecuador/.test(l))return RES.deportes;return RES.default;}
+function enviar(){var t=(input.value||'').trim();if(!t){input.focus();return;}input.value='';user(t);setTimeout(function(){bot(responder(t)+WA);},500);}
+send.addEventListener('click',enviar);input.addEventListener('keydown',function(e){if(e.key==='Enter'){enviar();}});
+bot('¡Hola! Bienvenido a <b>CHARCOPA PLAY</b>. Soy tu asistente automático. Elige una opción o escribe tu pregunta:');renderOpts();
+})();</script>
 </body>
 </html>
