@@ -449,19 +449,19 @@ deportes:'Tenemos todos los deportes en vivo: Liga Pro de Ecuador, ligas de Euro
 default:'Gracias por tu consulta. Para atenderte mejor y darte información exacta, contáctanos por WhatsApp y te respondemos al instante.'
 };
 var OPTS=[
-{t:'¿Cómo instalar la app?',k:'instalar',i:'ri-download-line'},
-{t:'Planes y precios',k:'precios',i:'ri-price-tag-3-line'},
-{t:'Pedir prueba gratis',k:'prueba',i:'ri-gift-line'},
-{t:'Problemas con el servicio',k:'problemas',i:'ri-error-warning-line'},
-{t:'Renovar / pagar servicio',k:'pago',i:'ri-bank-card-line'},
-{t:'Deportes y Liga Pro',k:'deportes',i:'ri-football-line'},
+{t:'¿Cómo instalar la app?',k:'instalar',i:'ri-download-line',w:'Hola CHARCOPA PLAY, necesito ayuda para instalar la app TELEPLUS PRO MAX'},
+{t:'Planes y precios',k:'precios',i:'ri-price-tag-3-line',w:'Hola CHARCOPA PLAY, quiero información sobre planes y precios'},
+{t:'Pedir prueba gratis',k:'prueba',i:'ri-gift-line',w:'Hola CHARCOPA PLAY, quiero mi prueba gratis'},
+{t:'Problemas con el servicio',k:'problemas',i:'ri-error-warning-line',w:'Hola CHARCOPA PLAY, tengo un problema con el servicio'},
+{t:'Renovar / pagar servicio',k:'pago',i:'ri-bank-card-line',w:'Hola CHARCOPA PLAY, quiero renovar o pagar mi servicio'},
+{t:'Deportes y Liga Pro',k:'deportes',i:'ri-football-line',w:'Hola CHARCOPA PLAY, quiero información sobre deportes y Liga Pro'},
 {t:'Finalizar conversación',k:'end',i:'ri-close-circle-line',red:true}
 ];
 function toggle(){panel.style.display=panel.style.display==='block'?'none':'block';}
 btn.addEventListener('click',toggle);close.addEventListener('click',toggle);
 function bot(html){var d=document.createElement('div');d.style.cssText='background:#fff;border-radius:12px 12px 12px 4px;padding:10px 12px;font-size:13px;color:#333;max-width:88%;box-shadow:0 1px 2px rgba(0,0,0,.06);line-height:1.5;align-self:flex-start;';d.innerHTML=html;msgs.appendChild(d);msgs.scrollTop=msgs.scrollHeight;}
 function user(t){var d=document.createElement('div');d.style.cssText='background:#1a73e8;color:#fff;border-radius:12px 12px 4px 12px;padding:8px 12px;font-size:13px;max-width:88%;line-height:1.4;align-self:flex-end;';d.textContent=t;msgs.appendChild(d);msgs.scrollTop=msgs.scrollHeight;}
-function renderOpts(){opts.innerHTML='';OPTS.forEach(function(o){var b=document.createElement('button');b.textContent=o.t;b.style.cssText='background:#fff;border:1px solid '+(o.red?'#f5c2c2':'#c5d9f5')+';border-radius:10px;padding:8px 12px;font-size:12.5px;color:'+(o.red?'#d93025':'#1a73e8')+';cursor:pointer;text-align:left;display:flex;align-items:center;gap:8px;font-family:inherit;font-weight:600;width:100%;';b.innerHTML='<i class="'+o.i+'"></i> '+o.t;b.addEventListener('click',function(){if(o.k==='end'){toggle();return;}user(o.t);setTimeout(function(){bot(RES[o.k]+WA);},500);});opts.appendChild(b);});}
+function renderOpts(){opts.innerHTML='';OPTS.forEach(function(o){var b=document.createElement('button');b.textContent=o.t;b.style.cssText='background:#fff;border:1px solid '+(o.red?'#f5c2c2':'#c5d9f5')+';border-radius:10px;padding:8px 12px;font-size:12.5px;color:'+(o.red?'#d93025':'#1a73e8')+';cursor:pointer;text-align:left;display:flex;align-items:center;gap:8px;font-family:inherit;font-weight:600;width:100%;';b.innerHTML='<i class="'+o.i+'"></i> '+o.t;b.addEventListener('click',function(){if(o.k==='end'){toggle();return;}user(o.t);setTimeout(function(){bot(RES[o.k]+WA);},500);waOpen(o.w||'Hola CHARCOPA PLAY, necesito atencion personalizada');});opts.appendChild(b);});}
 function responder(t){var l=t.toLowerCase();if(/instal|download|código|codigo|app|descarg/.test(l))return RES.instalar;if(/precio|plan|cuanto|valor|costo|mes|barato/.test(l))return RES.precios;if(/prueba|demo|gratis|trial|probar/.test(l))return RES.prueba;if(/falla|no funciona|corta|traba|problema|error|no carga|se traba/.test(l))return RES.problemas;if(/pago|pagar|renovar|transferencia|banco|cuenta|activar/.test(l))return RES.pago;if(/deporte|liga|futbol|fútbol|ufc|box|ppv|ecuador/.test(l))return RES.deportes;return RES.default;}
 function enviar(){var t=(input.value||'').trim();if(!t){input.focus();return;}input.value='';user(t);setTimeout(function(){bot(responder(t)+WA);},500);}
 send.addEventListener('click',enviar);input.addEventListener('keydown',function(e){if(e.key==='Enter'){enviar();}});
