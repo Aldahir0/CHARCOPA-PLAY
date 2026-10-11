@@ -457,6 +457,7 @@ var OPTS=[
 {t:'Deportes y Liga Pro',k:'deportes',i:'ri-football-line',w:'Hola CHARCOPA PLAY, quiero información sobre deportes y Liga Pro'},
 {t:'Finalizar conversación',k:'end',i:'ri-close-circle-line',red:true}
 ];
+function waOpen(t){window.open("https://wa.me/593996563465?text="+encodeURIComponent(t),"_blank");}
 function toggle(){panel.style.display=panel.style.display==='block'?'none':'block';}
 btn.addEventListener('click',toggle);close.addEventListener('click',toggle);
 function bot(html){var d=document.createElement('div');d.style.cssText='background:#fff;border-radius:12px 12px 12px 4px;padding:10px 12px;font-size:13px;color:#333;max-width:88%;box-shadow:0 1px 2px rgba(0,0,0,.06);line-height:1.5;align-self:flex-start;';d.innerHTML=html;msgs.appendChild(d);msgs.scrollTop=msgs.scrollHeight;}
