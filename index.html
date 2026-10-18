@@ -469,5 +469,40 @@ function enviar(){var t=(input.value||'').trim();if(!t){input.focus();return;}in
 send.addEventListener('click',enviar);input.addEventListener('keydown',function(e){if(e.key==='Enter'){enviar();}});
 bot('¡Hola! Bienvenido a <b>CHARCOPA PLAY</b>. Soy tu asistente automático. Elige una opción o escribe tu pregunta:');renderOpts();
 })();</script>
+
+<style>
+html{scroll-behavior:smooth;}
+body{font-size:16px;line-height:1.7;}
+section{scroll-margin-top:80px;}
+#toTop{position:fixed;bottom:90px;right:20px;width:46px;height:46px;border-radius:50%;background:var(--accent);color:#fff;border:none;font-size:20px;cursor:pointer;display:none;align-items:center;justify-content:center;z-index:999;box-shadow:0 6px 20px rgba(0,168,255,.4);}
+#toTop.show{display:flex;}
+#hamBtn{display:none;background:none;border:none;color:var(--text);font-size:24px;cursor:pointer;padding:6px 8px;}
+@media(max-width:760px){
+  #hamBtn{display:block;}
+  header nav{display:none!important;position:fixed;top:66px;right:0;background:rgba(4,8,20,.98);flex-direction:column!important;gap:0!important;width:230px;padding:8px 0;border-left:1px solid var(--border);border-bottom:1px solid var(--border);z-index:60;}
+  header nav.open{display:flex!important;}
+  header nav a{padding:14px 22px;width:100%;border-bottom:1px solid var(--border);font-size:15px;}
+}
+</style>
+<button id="toTop" aria-label="Volver arriba"><i class="ri-arrow-up-line"></i></button>
+<script>
+(function(){
+  var tt=document.getElementById('toTop');
+  window.addEventListener('scroll',function(){if(window.scrollY>400)tt.classList.add('show');else tt.classList.remove('show');});
+  tt.addEventListener('click',function(){window.scrollTo({top:0,behavior:'smooth'});});
+  var hdr=document.querySelector('header');
+  var nav=document.querySelector('header nav');
+  if(hdr&&nav){
+    var wrap=hdr.querySelector('div')||hdr;
+    var ham=document.createElement('button');
+    ham.id='hamBtn';ham.setAttribute('aria-label','Menú');
+    ham.innerHTML='<i class="ri-menu-line"></i>';
+    wrap.appendChild(ham);
+    ham.addEventListener('click',function(e){e.stopPropagation();nav.classList.toggle('open');ham.innerHTML=nav.classList.contains('open')?'<i class="ri-close-line"></i>':'<i class="ri-menu-line"></i>';});
+    nav.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){nav.classList.remove('open');ham.innerHTML='<i class="ri-menu-line"></i>';});});
+    document.addEventListener('click',function(e){if(!nav.contains(e.target)&&!ham.contains(e.target)){nav.classList.remove('open');ham.innerHTML='<i class="ri-menu-line"></i>';}});
+  }
+})();
+</script>
 </body>
 </html>
