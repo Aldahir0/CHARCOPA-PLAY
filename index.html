@@ -471,4 +471,18 @@ section{scroll-margin-top:80px;}
   m.addEventListener('click',function(e){if(e.target===m)cerrar();});
 })();
 </script>
+
+<audio id="bgMusic" src="entretenimiento.mp3" loop preload="auto" muted></audio>
+<button id="musicBtn" aria-label="Activar musica de fondo" style="position:fixed;bottom:18px;left:18px;width:48px;height:48px;border-radius:50%;background:var(--accent);color:#fff;border:none;font-size:20px;cursor:pointer;z-index:999;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 20px rgba(0,168,255,.4);"><i class="ri-music-2-line"></i></button>
+<style>#musicBtn.playing{background:var(--green);}#musicBtn.playing i{animation:musicSpin 4s linear infinite;}@keyframes musicSpin{to{transform:rotate(360deg);}}</style>
+<script>
+(function(){
+  var a=document.getElementById('bgMusic'),b=document.getElementById('musicBtn'),icon=b.querySelector('i');
+  function on(){a.muted=false;a.play().catch(function(){});b.classList.add('playing');icon.className='ri-volume-up-line';b.setAttribute('aria-label','Silenciar musica');}
+  function off(){a.muted=true;b.classList.remove('playing');icon.className='ri-volume-mute-line';b.setAttribute('aria-label','Activar musica');}
+  b.addEventListener('click',function(){if(a.muted){on();}else{off();}});
+  var first=true;
+  document.addEventListener('pointerdown',function(){if(first){first=false;on();}},{once:true});
+})();
+</script>
 </html>
