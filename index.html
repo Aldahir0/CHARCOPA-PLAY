@@ -112,8 +112,8 @@ a{color:inherit}
 #hamBtn{display:none;background:none;border:none;color:var(--text);font-size:24px;cursor:pointer;padding:6px 8px}
 @media(max-width:760px){
   #hamBtn{display:block}
-  #mainNav{display:none;position:fixed;top:66px;right:0;background:rgba(4,8,20,.98);backdrop-filter:blur(14px);flex-direction:column;gap:0;width:240px;padding:8px 0;border-left:1px solid var(--border);border-bottom:1px solid var(--border);z-index:60;max-height:calc(100vh - 66px);overflow-y:auto}
-  #mainNav.open{display:flex}
+  #mainNav{display:none!important;position:fixed;top:66px;right:0;background:rgba(4,8,20,.98);backdrop-filter:blur(14px);flex-direction:column;gap:0;width:240px;padding:8px 0;border-left:1px solid var(--border);border-bottom:1px solid var(--border);z-index:60;max-height:calc(100vh - 66px);overflow-y:auto}
+  #mainNav.open{display:flex!important}
   #mainNav a{padding:14px 22px;width:100%;border-bottom:1px solid var(--border);font-size:15px;color:var(--text)}
   .header-cta{display:none}
 }
